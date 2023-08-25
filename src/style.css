@@ -1,0 +1,31 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+:root {
+  --primary: #141414;
+  --light: #f3f3f3;
+  --dark: #686868;
+
+  --fs-small: 1rem;
+  --fs-normal: 1.5rem;
+  --fs-large: 2rem;
+}
+
+body {
+  font-family: system-ui;
+  font-size: var(--fs-normal);
+  color: var(--light);
+  background: var(--primary);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
