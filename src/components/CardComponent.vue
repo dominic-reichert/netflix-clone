@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, watchEffect } from "vue";
-import imageSrc from "../assets/sunflowers.webp";
+
 import { getElementDocumentOffset } from "../lib/dom-utils";
 
 const thumbnailElement = ref<HTMLDivElement>();
 const overlayElement = ref<HTMLDivElement>();
 const isOverlayVisible = ref(false);
+
+const props = defineProps(["cardImage", "cardTitle", "cardDescription"]);
 
 watchEffect(() => {
   if (!thumbnailElement.value || !overlayElement.value) return;
@@ -24,7 +26,11 @@ watchEffect(() => {
       class="carousel-item-thumbnail"
       @mouseenter="isOverlayVisible = true"
     >
-      <img :src="imageSrc" alt="Sunflowers" class="carousel-item-image" />
+      <img
+        :src="'https://image.tmdb.org/t/p/original/' + cardImage"
+        alt="cardImage"
+        class="carousel-item-image"
+      />
     </div>
     <Teleport to="body">
       <Transition name="scale">
@@ -34,7 +40,11 @@ watchEffect(() => {
           class="carousel-item-overlay"
           @mouseleave="isOverlayVisible = false"
         >
-          <img :src="imageSrc" alt="Sunflowers" class="carousel-item-image" />
+          <img
+            :src="'https://image.tmdb.org/t/p/original/' + cardImage"
+            alt="cardImage"
+            class="carousel-item-image"
+          />
           <div class="card-description">
             <div class="action-bar">
               <div class="bar-left">
@@ -52,6 +62,13 @@ watchEffect(() => {
                     alt="addButton"
                   />
                 </button>
+                <button class="like-button">
+                  <img
+                    class="like-icon"
+                    src="../assets/icons/likeButton.svg"
+                    alt="likeButton"
+                  />
+                </button>
               </div>
               <div class="bar-right">
                 <button class="down-button">
@@ -63,7 +80,8 @@ watchEffect(() => {
                 </button>
               </div>
             </div>
-            <div class="carousel-item-title">Sunflowers</div>
+            <div class="carousel-item-title">{{ cardTitle }}</div>
+            <div class="carousel-item-description">{{ cardDescription }}</div>
           </div>
         </div>
       </Transition>
@@ -98,6 +116,12 @@ watchEffect(() => {
 }
 .carousel-item-description {
   margin: 0.5rem;
+  font-size: var(--fs-small);
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .scale-enter-from,
 .scale-leave-to {

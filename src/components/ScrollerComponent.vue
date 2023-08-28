@@ -9,32 +9,40 @@
         <img class="prev-icon" src="../assets/icons/previous.svg" alt="" />
       </button>
       <div class="card-group" id="group-1">
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
+        <CardComponent
+          v-for="entry in apiData.slice(0, 5)"
+          :key="entry.id"
+          :cardTitle="entry.original_name"
+          :cardDescription="entry.overview"
+          :cardImage="entry.backdrop_path"
+        />
       </div>
       <div class="card-group" id="group-2">
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
+        <CardComponent
+          v-for="entry in apiData.slice(5, 10)"
+          :key="entry.id"
+          :cardTitle="entry.original_name"
+          :cardDescription="entry.overview"
+          :cardImage="entry.backdrop_path"
+        />
       </div>
       <div class="card-group" id="group-3">
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
+        <CardComponent
+          v-for="entry in apiData.slice(10, 15)"
+          :key="entry.id"
+          :cardTitle="entry.original_name"
+          :cardDescription="entry.overview"
+          :cardImage="entry.backdrop_path"
+        />
       </div>
       <div class="card-group" id="group-4">
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
+        <CardComponent
+          v-for="entry in apiData.slice(15, 21)"
+          :key="entry.id"
+          :cardTitle="entry.original_name"
+          :cardDescription="entry.overview"
+          :cardImage="entry.backdrop_path"
+        />
       </div>
       <button
         v-if="currentChild !== 4"
@@ -49,10 +57,10 @@
 
 <script setup>
 import CardComponent from "./CardComponent.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const currentChild = ref(1);
-const props = defineProps(["componentNumber"]);
+const props = defineProps(["componentNumber", "apiData"]);
 
 const clickNextHandler = () => {
   currentChild.value++;
