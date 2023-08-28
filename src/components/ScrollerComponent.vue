@@ -59,7 +59,9 @@ const clickNextHandler = () => {
   let elements = document.querySelector(
     ".scroller-" + props.componentNumber
   ).children;
-  elements[currentChild.value].scrollIntoView({ block: "nearest" });
+  elements
+    .namedItem("group-" + currentChild.value)
+    .scrollIntoView({ block: "nearest" });
 };
 
 const clickPrevHandler = () => {
@@ -74,6 +76,7 @@ const clickPrevHandler = () => {
 <style scoped>
 .scroller-container {
   position: relative;
+  margin: 1.5rem 0 2rem 0;
 }
 
 .card-scroller,
@@ -92,9 +95,16 @@ const clickPrevHandler = () => {
 
 .card-group {
   grid-auto-columns: 1fr;
-  overflow: hidden;
-  /* padding-left: 2rem; */
 }
+
+.card-scroller:hover .next {
+  opacity: 1;
+}
+
+.card-scroller:hover .prev {
+  opacity: 1;
+}
+
 .next,
 .prev {
   position: absolute;
@@ -104,10 +114,12 @@ const clickPrevHandler = () => {
   width: 2.5rem;
   padding: 0.25rem;
 
-  background: rgb(0 0 0 /0);
-  opacity: 1;
+  background: rgb(0 0 0 / 0);
+  opacity: 0;
 
   border: none;
+
+  z-index: 300;
 }
 
 .prev {
@@ -120,5 +132,10 @@ const clickPrevHandler = () => {
   right: 0;
   top: 0;
   bottom: 0;
+}
+
+.prev:hover,
+.next:hover {
+  background: rgb(0 0 0 / 0.3);
 }
 </style>

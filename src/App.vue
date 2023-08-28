@@ -17,6 +17,7 @@ import ScrollerComponent from "./components/ScrollerComponent.vue";
 
 <style scoped>
 main {
+  margin-top: 6rem;
   margin-bottom: 3rem;
 }
 .section-heading {
